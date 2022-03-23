@@ -21,14 +21,70 @@ struct Book
     char name[100];
     char title[50];
     char author[30];
-    int is_available;
 };
 
-int menu();
-void execute_action(int action);
+void menu();
+void add_patron();
+void add_book();
+
+
+int main()
+{
+    char title[100] = "County Library Management";
+    char status[100] = "welcome Francesco";
+    int action;
+
+    printf("\n\n\n\t\t\t   ****************\n\t\t\t%s\n \t\t\t\    %s\n\t\t\t   ****************\n", title, status);
+    menu();
+	return 0;
+}
+
+void menu()
+ {
+    int action = 0;
+
+    do {
+        printf("Select an action below\n");
+        printf("1. Add new Patron\n");
+        printf("2. view all patrons\n");
+        printf("3. Add new book\n");
+        printf("4. View all books\n");
+        printf("0. Exit program\n");
+        printf("\nYour actions: ");
+        scanf("%d", &action);
+        if(action < 1 || action > 4)
+        {
+            printf("invalid action\n");
+        }
+
+        switch(action) {
+            case 1:
+                add_patron();
+                break;
+            case 2:
+                printf(" view all patrons\n");
+                break;
+            case 3:
+                add_book();
+                break;
+            case 4:
+                printf(" View all resources\n");
+                break;
+            case 0:
+                exit(1);
+                break;
+            default:
+                printf("Wrong Entry.");
+
+        }
+    } while (action != 0);
+}
+
 void add_patron()
 {
+    system("cls");
     struct Patron patron;
+    printf("Create Patron");
     printf("enter Name: ");
     getchar();
     gets(patron.name);
@@ -38,10 +94,15 @@ void add_patron()
     gets(patron.password);
     printf("enter 1 if staff 0 otherwise: ");
     scanf("%d", &patron.is_staff);
-    printf("Patron %s successfully added\n", patron.name);
+
+    printf("Enter any key to go to main....\n");
+    getchar();
+    system("cls");
 }
+
 void add_book()
 {
+    system("cls");
     struct Book book;
     printf("Enter book: ");
     getchar();
@@ -50,59 +111,12 @@ void add_book()
     gets(book.title);
     printf("Enter name of the author: ");
     gets(book.author);
-    printf("enter 1 if book 0 otherwise: ");
-    scanf("%d", &book.is_available);
-    printf("book %s successfully added\n", book.name);
+
+    printf("Enter any key to go to main....\n");
+    getchar();
+    system("cls");
 }
 
-int main()
-{
-    char title[100] = "County Library Management";
-    char status[100] = "welcome Francesco";
-    int action;
 
-    printf("\n\n\n\t\t\t   ****************\n\t\t\t%s\n \t\t\t\    %s\n\t\t\t   ****************\n", title, status);
-    execute_action(menu());
-	return 0;
-}
-
-int menu ()
- {
-    int action;
-
-    printf("Select an action below\n");
-    printf("1. Add new Patron\n");
-    printf("2. view all patrons\n");
-    printf("3. Add new book\n");
-    printf("4. View all books\n");
-    printf("Your actions: \n");
-    scanf("%d", &action);
-    if(action < 1 || action > 4)
-    {
-    	printf("invalid action\n");
-	}
-	return action;
-}
-void execute_action(int action)
-{
-    printf("Choice is: %d\n", action);
-    switch(action) {
-    case 1:
-        add_patron();
-        break;
-    case 2:
-        printf(" view all patrons\n");
-        break;
-    case 3:
-        add_book();
-        break;
-    case 4:
-        printf(" View all resources\n");
-        break;
-    default:
-        printf("Wrong Entry.");
-
-    }
-}
 
 
